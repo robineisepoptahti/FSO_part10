@@ -21,6 +21,15 @@ const styles = StyleSheet.create({
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
+  iconPic: {
+    fontWeight: theme.fontWeights.bold,
+    backgroundColor: "blue",
+    color: "white",
+    marginTop: 10,
+    padding: 5,
+    borderRadius: 3,
+    alignSelf: "flex-start",
+  },
 });
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
@@ -28,6 +37,7 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     styles.text,
     color === "textSecondary" && styles.colorTextSecondary,
     color === "primary" && styles.colorPrimary,
+    color === "iconPic" && styles.iconPic,
     fontSize === "subheading" && styles.fontSizeSubheading,
     fontWeight === "bold" && styles.fontWeightBold,
     style,

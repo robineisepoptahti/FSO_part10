@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import Text from "./Text";
 import theme from "../theme";
@@ -23,24 +23,26 @@ const AppBar = () => {
         flexDirection: "row",
       }}
     >
-      <View style={[(display = "flex"), (flexDirection = "column")]}>
-        <Pressable style={theme.backgrounds.bar}>
-          <Link to="/">
-            <Text style={{ color: "white", fontWeight: "bold", padding: 8 }}>
-              Repositories
-            </Text>
-          </Link>
-        </Pressable>
-      </View>
-      <View style={[(display = "flex"), (flexDirection = "column")]}>
-        <Pressable style={theme.backgrounds.bar}>
-          <Link to="/signin">
-            <Text style={{ color: "white", fontWeight: "bold", padding: 8 }}>
-              Sign in
-            </Text>
-          </Link>
-        </Pressable>
-      </View>
+      <ScrollView horizontal>
+        <View style={[(display = "flex"), (flexDirection = "column")]}>
+          <Pressable style={theme.backgrounds.bar}>
+            <Link to="/">
+              <Text style={{ color: "white", fontWeight: "bold", padding: 8 }}>
+                Repositories
+              </Text>
+            </Link>
+          </Pressable>
+        </View>
+        <View style={[(display = "flex"), (flexDirection = "column")]}>
+          <Pressable style={theme.backgrounds.bar}>
+            <Link to="/signin">
+              <Text style={{ color: "white", fontWeight: "bold", padding: 8 }}>
+                Sign in
+              </Text>
+            </Link>
+          </Pressable>
+        </View>
+      </ScrollView>
     </View>
   );
 };

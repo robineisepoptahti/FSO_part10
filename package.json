@@ -6,6 +6,7 @@
     "eslint-plugin-react-native": "^5.0.0"
   },
   "dependencies": {
+    "dotenv": "^17.2.1",
     "expo": "^53.0.20"
   }
 }

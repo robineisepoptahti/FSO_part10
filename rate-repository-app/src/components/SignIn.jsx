@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import useSignIn from "../hooks/useSignIn";
 import authStorage from "../utils/authStorage";
+import { useNavigate } from "react-router";
 
 const validationSchema = yup.object().shape({
   username: yup.string().required("Username missing."),
@@ -92,23 +93,13 @@ const SignInForm = ({ onSubmit }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
-
     try {
-      const { data } = await signIn({ username, password });
-      console.log(data);
-      if (data) {
-        const user = new authStorage("auth");
-        //Just demonstrating how token is stored and removed
-        user.setAccessToken(data.authenticate.accessToken);
-        const token = await user.getAccessToken();
-        console.log(token);
-        await user.removeAccessToken();
-        const emptyToken = await user.getAccessToken();
-        console.log(emptyToken);
-      }
+      await signIn({ username, password });
+      navigate("/");
     } catch (e) {
       console.log(e);
     }

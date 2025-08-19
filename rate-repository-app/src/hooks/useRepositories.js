@@ -6,6 +6,7 @@ const useRepositories = () => {
     fetchPolicy: "cache-and-network",
     // Other options
   });
+
   console.log("useQuery called:", { data, loading, error });
   if (error) {
     console.error("GraphQL Error:", error);

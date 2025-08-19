@@ -3,6 +3,7 @@ import Text from "./Text";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import useSignIn from "../hooks/useSignIn";
+import authStorage from "../utils/authStorage";
 
 const validationSchema = yup.object().shape({
   username: yup.string().required("Username missing."),
@@ -98,6 +99,16 @@ const SignIn = () => {
     try {
       const { data } = await signIn({ username, password });
       console.log(data);
+      if (data) {
+        const user = new authStorage("auth");
+        //Just demonstrating how token is stored and removed
+        user.setAccessToken(data.authenticate.accessToken);
+        const token = await user.getAccessToken();
+        console.log(token);
+        await user.removeAccessToken();
+        const emptyToken = await user.getAccessToken();
+        console.log(emptyToken);
+      }
     } catch (e) {
       console.log(e);
     }

@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.9",
+    "@apollo/client-devtools-vscode": "^4.19.13",
     "@expo/metro-config": "^0.17.4",
     "@expo/metro-runtime": "~3.1.1",
+    "@react-native-async-storage/async-storage": "1.21.0",
     "expo": "~50.0.17",
     "expo-constants": "^17.1.7",
     "expo-status-bar": "~1.11.1",
@@ -26,8 +28,7 @@
     "react-native": "0.73.6",
     "react-native-web": "~0.19.6",
     "react-router-native": "^6.30.0",
-    "yup": "^1.6.1",
-    "@react-native-async-storage/async-storage": "1.21.0"
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

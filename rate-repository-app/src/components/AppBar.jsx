@@ -3,6 +3,11 @@ import Constants from "expo-constants";
 import Text from "./Text";
 import theme from "../theme";
 import { Link } from "react-router-native";
+import { useQuery } from "@apollo/client";
+import { GET_ME } from "../graphql/queries";
+import useAuthStorage from "../hooks/useAuthStorage";
+import { useApolloClient } from "@apollo/client";
+import { useState, useEffect } from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +18,18 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  console.log("BVDFG");
+  const authStorage = useAuthStorage();
+  const apolloClient = useApolloClient();
+
+  const { data, loading, error } = useQuery(GET_ME, {
+    fetchPolicy: "cache-and-network",
+  });
+  console.log(data);
+  const signOut = async () => {
+    console.log("Sign out started");
+    await authStorage.removeAccessToken();
+    apolloClient.resetStore();
+  };
   return (
     <View
       style={{
@@ -34,13 +50,19 @@ const AppBar = () => {
           </Pressable>
         </View>
         <View style={[(display = "flex"), (flexDirection = "column")]}>
-          <Pressable style={theme.backgrounds.bar}>
+          {data && data.me ? (
+            <Pressable onPress={() => signOut()}>
+              <Text style={{ color: "white", fontWeight: "bold", padding: 8 }}>
+                Sign out
+              </Text>
+            </Pressable>
+          ) : (
             <Link to="/signin">
               <Text style={{ color: "white", fontWeight: "bold", padding: 8 }}>
                 Sign in
               </Text>
             </Link>
-          </Pressable>
+          )}
         </View>
       </ScrollView>
     </View>

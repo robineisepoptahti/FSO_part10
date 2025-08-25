@@ -21,7 +21,10 @@ const shorten = (number) => {
 const RepositoryItem = (props) => {
   const { item } = props;
   return (
-    <View style={{ ...styles.flexContColumn, padding: 15 }}>
+    <View
+      testID="repositoryItem"
+      style={{ ...styles.flexContColumn, padding: 15 }}
+    >
       <View style={styles.flexContRow}>
         <View>
           <Image

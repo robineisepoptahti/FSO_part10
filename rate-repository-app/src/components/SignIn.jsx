@@ -3,7 +3,6 @@ import Text from "./Text";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import useSignIn from "../hooks/useSignIn";
-import authStorage from "../utils/authStorage";
 import { useNavigate } from "react-router";
 
 const validationSchema = yup.object().shape({
@@ -45,7 +44,7 @@ const initialValues = {
   password: "",
 };
 
-const SignInForm = ({ onSubmit }) => {
+export const SignInForm = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,

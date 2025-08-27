@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   },
   flexContColumn: {
     flexDirection: "column",
-    flex: 1,
     gap: 10,
   },
 });

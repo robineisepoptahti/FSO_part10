@@ -64,6 +64,19 @@ const AppBar = () => {
             </Link>
           )}
         </View>
+        {data && data.me ? (
+          <View style={[(display = "flex"), (flexDirection = "column")]}>
+            <Pressable style={theme.backgrounds.bar}>
+              <Link to="/createreview">
+                <Text
+                  style={{ color: "white", fontWeight: "bold", padding: 8 }}
+                >
+                  Create review
+                </Text>
+              </Link>
+            </Pressable>
+          </View>
+        ) : null}
       </ScrollView>
     </View>
   );

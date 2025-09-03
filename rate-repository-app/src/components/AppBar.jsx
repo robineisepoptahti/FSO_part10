@@ -77,6 +77,19 @@ const AppBar = () => {
             </Pressable>
           </View>
         ) : null}
+        {data?.me ? null : (
+          <View style={[(display = "flex"), (flexDirection = "column")]}>
+            <Pressable style={theme.backgrounds.bar}>
+              <Link to="/signup">
+                <Text
+                  style={{ color: "white", fontWeight: "bold", padding: 8 }}
+                >
+                  Sign up
+                </Text>
+              </Link>
+            </Pressable>
+          </View>
+        )}
       </ScrollView>
     </View>
   );

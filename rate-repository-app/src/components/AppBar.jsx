@@ -7,7 +7,6 @@ import { useQuery } from "@apollo/client";
 import { GET_ME } from "../graphql/queries";
 import useAuthStorage from "../hooks/useAuthStorage";
 import { useApolloClient } from "@apollo/client";
-import { useState, useEffect } from "react";
 
 const styles = StyleSheet.create({
   container: {
@@ -77,6 +76,21 @@ const AppBar = () => {
             </Pressable>
           </View>
         ) : null}
+
+        {data && data.me ? (
+          <View style={[(display = "flex"), (flexDirection = "column")]}>
+            <Pressable style={theme.backgrounds.bar}>
+              <Link to="/myreviews">
+                <Text
+                  style={{ color: "white", fontWeight: "bold", padding: 8 }}
+                >
+                  My reviews
+                </Text>
+              </Link>
+            </Pressable>
+          </View>
+        ) : null}
+
         {data?.me ? null : (
           <View style={[(display = "flex"), (flexDirection = "column")]}>
             <Pressable style={theme.backgrounds.bar}>

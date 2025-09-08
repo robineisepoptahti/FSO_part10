@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ME } from "../graphql/queries";
 import useAuthStorage from "../hooks/useAuthStorage";
 import { useApolloClient } from "@apollo/client";
+import { useNavigate } from "react-router-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const navigate = useNavigate();
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
 
@@ -27,7 +29,8 @@ const AppBar = () => {
   const signOut = async () => {
     console.log("Sign out started");
     await authStorage.removeAccessToken();
-    apolloClient.resetStore();
+    await apolloClient.resetStore();
+    navigate("/");
   };
   return (
     <View

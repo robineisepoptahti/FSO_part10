@@ -89,12 +89,16 @@ export class RepositoryListContainer extends React.Component {
           </Pressable>
         )}
         ListHeaderComponent={this.renderHeader}
+        onEndReached={this.props.onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
   }
 }
 
 const RepositoryList = () => {
+  const first = 3;
+
   const navigate = useNavigate();
   const [selectedSortingMethod, setSelectedSortingMethod] =
     useState("CREATED_AT");
@@ -103,11 +107,15 @@ const RepositoryList = () => {
     selectedSortingMethod === "RATING_AVERAGE_ASC" ? "DESC" : "ASC";
   const orderBy =
     selectedSortingMethod === "CREATED_AT" ? "CREATED_AT" : "RATING_AVERAGE";
-  const { repositories } = useRepositories(
+  const { repositories, fetchMore } = useRepositories(
     orderBy,
     orderDirection,
-    searchKeyword
+    searchKeyword,
+    first
   );
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <RepositoryListContainer
@@ -117,6 +125,7 @@ const RepositoryList = () => {
       searchKeyword={searchKeyword}
       setSearchKeyword={setSearchKeyword}
       navigate={navigate}
+      onEndReach={onEndReach}
     />
   );
 };

@@ -79,9 +79,10 @@ const ReviewItem = ({ review }) => {
 };
 
 const SingleRepository = () => {
+  const first = 3;
   const { id, loading, error } = useParams();
   console.log("Item activated!!!!!!!!!!!!!!");
-  const { repository } = useRepository(id);
+  const { repository, fetchMore } = useRepository(id, first);
   if (loading) {
     return <Text>Loading...</Text>;
   }
@@ -91,14 +92,18 @@ const SingleRepository = () => {
   if (!repository) {
     return null;
   }
+  const onEndReach = () => {
+    fetchMore();
+  };
   return (
     <FlatList
       data={repository.reviews.edges}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => <ReviewItem review={item.node} />}
-      keyExtractor={({ id }) => id}
+      keyExtractor={({ node }) => node.id}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
-      // ...
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
